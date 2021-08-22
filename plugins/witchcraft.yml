@@ -1,0 +1,5 @@
+nrepl:
+  port: 25555
+  middleware:
+  - refactor-nrepl.middleware/wrap-refactor
+  - cider.nrepl/cider-middleware
