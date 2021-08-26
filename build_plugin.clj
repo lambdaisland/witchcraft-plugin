@@ -37,8 +37,7 @@
                                            paper
                                            :mc/paper-api
                                            glowstone
-                                           :mc/glowstone)
-                                         :cider/nrepl]})
+                                           :mc/glowstone)]})
         jar-file (format "target/%s-%s-for-%s-%s.jar"
                          (name lib)
                          version
@@ -58,7 +57,7 @@
     (b/uber {:class-dir class-dir
              :uber-file jar-file
              :basis (b/create-basis {:project "deps.edn"
-                                     :aliases [:witchcraft :cider/nrepl]})}))
+                                     :aliases [:licp :nrepl]})}))
   params)
 
 (defn build-all [& _]
