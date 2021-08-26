@@ -4,6 +4,8 @@
             [clojure.pprint :as pprint]
             [lambdaisland.classpath :as cp]))
 
+(def instance (atom nil))
+
 (def config-file (io/file "plugins/witchcraft.edn"))
 
 (def default-config
@@ -28,6 +30,7 @@
   (with-out-str (pprint/pprint o)))
 
 (defn on-enable [plugin]
+  (reset! instance plugin)
   (when-not (.exists config-file)
     (.info (.getLogger plugin) (str "No " config-file " found, creating default."))
     (.mkdirs (io/file (.getParent config-file)))
@@ -57,4 +60,5 @@
                 (str "Init form failed to evaluate: " (pr-str form))
                 e))))))
 
-(defn on-disable [plugin])
+(defn on-disable [plugin]
+  (reset! instance nil))
