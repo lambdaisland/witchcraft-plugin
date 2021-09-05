@@ -11,10 +11,12 @@
   :witchcraft {:extra-deps {com.lambdaisland/witchcraft {:git/url "https://github.com/lambdaisland/witchcraft"
                                                          :git/sha "fef41c2ab49b89c6b3632c546cac9c33dc7e99ea"}}}
 
-  :mc/glowstone {:extra-deps {net.glowstone/glowstone {:mvn/version "2021.7.0-SNAPSHOT"}}}
-  :mc/paper     {:extra-deps {io.papermc/paper {:local/root "/home/arne/Downloads/paper-1.17.1-157.jar"}}}
-  :mc/paperclip {:extra-deps {io.papermc/paperclip {:mvn/version "2.0.1"}}}
-  :mc/paper-api {:extra-deps {io.papermc.paper/paper-api {:mvn/version "1.17.1-R0.1-SNAPSHOT"}}}
+  :mc/glowstone-1.12 {:extra-deps {net.glowstone/glowstone {:mvn/version "2021.7.0-SNAPSHOT"}}}
+  :mc/paper-1.17 {:extra-deps {io.papermc.paper/paper-api {:mvn/version "1.17.1-R0.1-SNAPSHOT"}}}
+  :mc/spigot-1.17 {:extra-deps {org.spigotmc/spigot-api {:mvn/version "1.17.1-R0.1-SNAPSHOT"}}}
+
+  ;; :mc/paper     {:extra-deps {io.papermc/paper {:local/root "/home/arne/Downloads/paper-1.17.1-157.jar"}}}
+  ;; :mc/paperclip {:extra-deps {io.papermc/paperclip {:mvn/version "2.0.1"}}}
 
   :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.8.3"}}}
 
@@ -24,11 +26,21 @@
   :build-plugin
   {:extra-paths ["clj_yaml/src"]
    :extra-deps  {io.github.clojure/tools.build {:git/url "https://github.com/clojure/tools.build"
-                                                :sha     "d3008e159eb2afbc4b0019e1d36cf20e1129c394"}}
+                                                :sha     "d3008e159eb2afbc4b0019e1d36cf20e1129c394"}
+                 shade/shade {:mvn/version "0.4.0"}}
    :ns-default  build-plugin
-   :exec-fn build}}
+   :exec-fn build}
+
+  :build-all
+  {:extra-paths ["clj_yaml/src"]
+   :extra-deps  {io.github.clojure/tools.build {:git/url "https://github.com/clojure/tools.build"
+                                                :sha     "d3008e159eb2afbc4b0019e1d36cf20e1129c394"}
+                 shade/shade {:mvn/version "0.4.0"}}
+   :ns-default  build-plugin
+   :exec-fn build-all}}
 
  :mvn/repos
  {"glowstone-repo" {:url "https://repo.glowstone.net/content/repositories/snapshots/"}
   "aikar"          {:url "https://repo.aikar.co/nexus/content/repositories/aikar-release/"}
-  "papermc"        {:url "https://papermc.io/repo/repository/maven-public/"}}}
+  "papermc"        {:url "https://papermc.io/repo/repository/maven-public/"}
+  "spigot"         {:url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/"}}}

@@ -4,11 +4,12 @@
 [![cljdoc badge](https://cljdoc.org/badge/com.lambdaisland/witchcraft-plugin)](https://cljdoc.org/d/com.lambdaisland/witchcraft-plugin) [![Clojars Project](https://img.shields.io/clojars/v/com.lambdaisland/witchcraft-plugin.svg)](https://clojars.org/com.lambdaisland/witchcraft-plugin)
 <!-- /badges -->
 
-A Clojure plugin for Bukkit-based minecraft servers (Paper, Spigot, CraftBukkit, Glowstone)
+A Clojure plugin for Bukkit-based minecraft servers (Paper, Spigot, Glowstone)
 
-## Installation
+## Build
 
-To build the plugin you need a recent version of Clojure CLI, see the [Clojure getting started](https://clojure.org/guides/getting_started) guide
+To build the plugin you need a recent version of Clojure CLI, see the [Clojure
+getting started](https://clojure.org/guides/getting_started) guide
 
 ```
 $ clojure --version
@@ -16,16 +17,27 @@ Clojure CLI version 1.10.3.943
 ```
 
 Then use the build-plugin task, you need to tell it which server you will be
-using, and the API version. Currently only PaperMC 1.17 has been tested.
+using, and the API version. 
 
 ```
+clojure -T:build-plugin build :server glowstone :api-version 1.12
 clojure -T:build-plugin build :server paper :api-version 1.17 
+clojure -T:build-plugin build :server spigot :api-version 1.17 
 ```
+
+These will create two files each 
+
+- `target/witchcraft-plugin-<version>-for-<server>-<api-version>.jar`
+- `target/witchcraft-plugin-<version>-for-<server>-<api-version>-shaded.jar`
+
+It is recommended to use the shaded version. For Glowstone you must use the
+shaded version. (Naether pulls in an old plexus-utils, which conflicts with
+tools.deps.alpha).
 
 Copy the plugin jar to your server's `plugins` directory
 
 ```
-$ cp target/witchcraft-plugin-0.0.3-for-paper-1.17.jar ~/PaperMC/plugins/
+$ cp target/witchcraft-plugin-0.0.7-for-paper-1.17-shaded.jar ~/PaperMC/plugins/
 ```
 
 The first time you run the server it will create a `deps.edn` and

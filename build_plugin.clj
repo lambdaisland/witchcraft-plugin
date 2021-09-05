@@ -1,12 +1,25 @@
 (ns build-plugin
   (:require [clojure.tools.build.api :as b]
             [clojure.string :as str]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io]
+            [shade.core :as shade])
+  (:import java.nio.file.FileSystems
+           java.nio.file.Path
+           java.nio.file.Paths
+           java.nio.file.Files
+           java.nio.file.FileVisitOption
+           java.nio.file.StandardOpenOption
+           java.nio.charset.StandardCharsets
+           java.net.URI))
 
 (def lib 'com.lambdaisland/witchcraft-plugin)
 (def version (format "0.0.%s" (b/git-count-revs nil)))
 (def class-dir "target/classes")
-(def jar-file )
+
+(def shadings
+  {"org.eclipse.aether" "com.lambdaisland.shaded.org.eclipse.aether"
+   "org.apache.maven" "com.lambdaisland.shaded.org.apache.maven"
+   "org.codehaus.plexus" "com.lambdaisland.shaded.org.codehaus.plexus"})
 
 (defn clean [params]
   (b/delete {:path "target"})
@@ -29,15 +42,32 @@
           :description "Bootstrap Clojure/nREPL/Witchcraft"
           :api-version api-version})))
 
+(defn shade-jar [in out]
+  ;; java
+  (shade/shade in out shadings)
+
+  ;; clojure
+  (with-open [zipfs (FileSystems/newFileSystem ^Path (Paths/get out (into-array String [])))] ;; Requires JDK 12
+    (let [paths (iterator-seq (.iterator (Files/walk (first (.getRootDirectories zipfs)) (make-array FileVisitOption 0))))]
+      (doseq [path paths
+              :when (re-find #"\.cljc?$" (str path))]
+        (let [txt (slurp (.toUri path))
+              shaded (reduce
+                      (fn [txt [from to]]
+                        (str/replace txt from to))
+                      txt
+                      shadings)]
+          (when (not= shaded txt)
+            (Files/write path
+                         (.getBytes shaded StandardCharsets/UTF_8)
+                         (into-array StandardOpenOption
+                                     [StandardOpenOption/TRUNCATE_EXISTING]))))))))
+
 (defn build [{:keys [env api-version server] :as params
               :or {api-version "1.17"
                    server 'paper}}]
   (let [basis (b/create-basis {:project "deps.edn"
-                               :aliases [(case server
-                                           paper
-                                           :mc/paper-api
-                                           glowstone
-                                           :mc/glowstone)]})
+                               :aliases [(keyword "mc" (str server "-" api-version))]})
         jar-file (format "target/%s-%s-for-%s-%s.jar"
                          (name lib)
                          version
@@ -50,16 +80,19 @@
                   :src-dirs ["src"]})
     (b/javac {:src-dirs ["java"]
               :class-dir class-dir
-              :basis basis})
+              :basis basis
+              :javac-opts ["-source" "11" "-target" "11"]})
     (b/copy-dir {:src-dirs ["src"]
                  :target-dir class-dir})
     (plugin-yml {:target-dir class-dir :api-version api-version})
     (b/uber {:class-dir class-dir
              :uber-file jar-file
              :basis (b/create-basis {:project "deps.edn"
-                                     :aliases [:licp :nrepl]})}))
+                                     :aliases [:licp :nrepl]})})
+    (shade-jar jar-file (str/replace jar-file ".jar" "-shaded.jar")))
   params)
 
 (defn build-all [& _]
   (build '{:server glowstone :api-version 1.12})
-  (build '{:server paper :api-version 1.17}))
+  (build '{:server paper :api-version 1.17})
+  (build '{:server spigot :api-version 1.17}))
