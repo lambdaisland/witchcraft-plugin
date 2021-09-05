@@ -28,8 +28,16 @@ The first time you start the server you should see something like this:
 [09:33:36 INFO]: nREPL server started on port 25555 on host localhost - nrepl://localhost:25555
 ```
 
-Now you can connect with your editor to port 25555 and start manipulating the
-game. If you get any errors at this stage please file [an issue](https://github.com/lambdaisland/witchcraft-plugin/issues).
+Now you can connect with your nREPL-capable editor to port 25555 and start
+manipulating the game. If you get any errors at this stage please file [an
+issue](https://github.com/lambdaisland/witchcraft-plugin/issues).
+
+If you are new to Clojure and are unsure which development environment to pick
+then we recommend [Calva](https://calva.io/) for Visual Studio Code. For a
+fairly complete list of Clojure-capable editors see this [overview by
+practical.li](https://practical.li/clojure/clojure-editors/).
+
+## Configuration
 
 There are two files that are used to configure the plugin,
 `plugins/witchcraft.edn`, and `deps.edn`. Both are in the [EDN
@@ -46,12 +54,6 @@ starts.
 The first time you run the server it will create a `deps.edn` and
 `plugins/witchcraft.edn`. It will also start an nREPL server, and invoke any
 `:init` commands you have in your `witchcraft.edn`.
-
-The plugin JAR bundles Clojure, nREPL, and clojure.tools.deps. Any additional
-dependencies (e.g. nREPL middleware,
-[Witchcraft](https://github.com/lambdaisland/witchcraft),
-[clj-minecraft](https://github.com/CmdrDats/clj-minecraft)) can be loaded via
-`deps.edn`.
 
 ### witchcraft.edn
 
@@ -75,12 +77,35 @@ dependencies (e.g. nREPL middleware,
   
 ### deps.edn
 
-See the [Clojure Deps and CLI Guide](https://clojure.org/guides/deps_and_cli)
+The plugin JAR only bundles Clojure itself (the compiler and core library),
+nREPL (for interaction), and clojure.tools.deps (for `deps.edn` support). Any
+additional dependencies (e.g. nREPL middleware,
+[Witchcraft](https://github.com/lambdaisland/witchcraft),
+[clj-minecraft](https://github.com/CmdrDats/clj-minecraft)) can be loaded by
+adding them to `deps.edn`.
+
+Through `deps.edn` you can pull in dependencies from Maven/Clojars, or directly
+from Github. See the [Clojure Deps and CLI Guide](https://clojure.org/guides/deps_and_cli) 
 for how to set up `deps.edn`.
 
 When no `deps.edn` is present the plugin will create one on first use, which
 loads the [witchcraft library](https://github.com/lambdaisland/witchcraft), as
-well as the CIDER and refactor-nrepl middlewares for nREPL.
+well as the CIDER and refactor-nrepl middlewares for nREPL, which will look
+something like this:
+
+```clojure
+{:deps
+ {com.lambdaisland/witchcraft
+  {:git/url "https://github.com/lambdaisland/witchcraft"
+   :git/sha "..."}
+  refactor-nrepl/refactor-nrepl {:mvn/version "2.5.1"}
+  cider/cider-nrepl {:mvn/version "0.26.0"}}}
+```
+
+You can use [lambdaisland/classpath](https://github.com/lambdaisland/classpath)
+to reload your `deps.edn` without having to restart the server. (see
+`lambdaisland.classpath/update-classpath!` or
+`lambdaisland.classpath.watch-deps/start!`).
 
 ## Build
 
