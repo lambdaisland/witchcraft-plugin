@@ -6,10 +6,10 @@
   {:extra-paths ["dev" "repl_sessions"]}
 
   :licp {:extra-deps {com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                                  :git/sha "f2531b062edc3fd23173463ea7514e38c0cbc749"}}}
+                                                  :git/sha "d80cfc0e3955fc3f1b79da8d49524ae32d2e7865"}}}
 
   :witchcraft {:extra-deps {com.lambdaisland/witchcraft {:git/url "https://github.com/lambdaisland/witchcraft"
-                                                         :git/sha "fef41c2ab49b89c6b3632c546cac9c33dc7e99ea"}}}
+                                                         :git/sha "4216141c738c54f1e6c622db23e787228aba1959"}}}
 
   :mc/glowstone-1.12 {:extra-deps {net.glowstone/glowstone {:mvn/version "2021.7.0-SNAPSHOT"}}}
   :mc/paper-1.17 {:extra-deps {io.papermc.paper/paper-api {:mvn/version "1.17.1-R0.1-SNAPSHOT"}}}

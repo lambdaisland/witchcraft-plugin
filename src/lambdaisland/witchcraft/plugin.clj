@@ -11,15 +11,17 @@
 (def default-config
   '{:nrepl {:port 25555
             :middleware [refactor-nrepl.middleware/wrap-refactor
-                         cider.nrepl/cider-middleware]}
-    :init [(require 'lambdaisland.witchcraft)
-           (lambdaisland.witchcraft/init-xmaterial!)]
+                         cider.nrepl/cider-middleware
+                         lambdaisland.witchcraft.nrepl.task-eval/wrap-eval]}
+    :init [(require 'lambdaisland.witchcraft 'lambdaisland.witchcraft.paper)
+           (lambdaisland.witchcraft/init-xmaterial!)
+           (alter-var-root #'lambdaisland.witchcraft/server-type (constantly :paper))]
     :deps true})
 
 (def default-deps-edn
   '{:deps
     {com.lambdaisland/witchcraft {:git/url "https://github.com/lambdaisland/witchcraft"
-                                  :git/sha "fef41c2ab49b89c6b3632c546cac9c33dc7e99ea"}
+                                  :git/sha "4216141c738c54f1e6c622db23e787228aba1959"}
      refactor-nrepl/refactor-nrepl {:mvn/version "2.5.1"}
      cider/cider-nrepl             {:mvn/version "0.26.0"}}})
 
