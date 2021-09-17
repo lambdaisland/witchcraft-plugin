@@ -65,7 +65,7 @@
                                      [StandardOpenOption/TRUNCATE_EXISTING]))))))))
 
 (defn witchcraft-coords []
-  (licp/git-pull-lib 'com.lambdaisland/witchcraft)
+  #_  (licp/git-pull-lib 'com.lambdaisland/witchcraft)
   (get-in (read-string (slurp "deps.edn"))
           [:aliases :witchcraft :extra-deps 'com.lambdaisland/witchcraft]))
 
@@ -82,11 +82,12 @@
     (.mkdirs (io/file class-dir "witchcraft_plugin"))
     (spit (io/file class-dir "witchcraft_plugin" "default_config.edn")
           (slurp (io/resource "witchcraft_plugin/default_config.edn.tmpl")))
-    (spit (io/file class-dir "witchcraft_plugin" "default_config.edn")
+    (spit (io/file class-dir "witchcraft_plugin" "default_deps.edn")
           (str/replace
-           (slurp (io/resource "witchcraft_plugin/default_config.edn.tmpl"))
+           (slurp (io/resource "witchcraft_plugin/default_deps.edn.tmpl"))
            "{{witchcraft-coords}}"
-           (pr-str witchcraft-coords)))
+           (binding [*print-namespace-maps* false]
+             (pr-str (witchcraft-coords)))))
     (b/write-pom {:class-dir class-dir
                   :lib lib
                   :version version

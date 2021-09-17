@@ -6,7 +6,7 @@
   {:extra-paths ["dev" "repl_sessions"]}
 
   :licp {:extra-deps {com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                                  :git/sha "49abb48eb030e2592d2f3105afe70e26d2ea4779"}}}
+                                                  :git/sha "281595971ccd84ebd7346935114b2d188a93f464"}}}
 
   :witchcraft {:extra-deps {com.lambdaisland/witchcraft {:git/url "https://github.com/lambdaisland/witchcraft"
                                                          :git/sha "ee62b4597a2afa0ef9db968bbcc5ea2b2c5baf1c"}}}
@@ -29,7 +29,7 @@
                                                 :git/sha "08fd626d39fdf02d8fa3fda6d2fa09bbdddc4fcc"
                                                 :git/branch "master"}
                  com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                             :git/sha "49abb48eb030e2592d2f3105afe70e26d2ea4779"}
+                                             :git/sha "281595971ccd84ebd7346935114b2d188a93f464"}
                  shade/shade {:mvn/version "0.4.0"}}
    :ns-default  build-plugin
    :exec-fn build}
@@ -37,10 +37,10 @@
   :build-all
   {:extra-paths ["clj_yaml/src" "resources"]
    :extra-deps  {io.github.clojure/tools.build {:git/url "https://github.com/clojure/tools.build"
-                                                :git/branch "master"
-                                                :git/sha "08fd626d39fdf02d8fa3fda6d2fa09bbdddc4fcc"}
+                                                :git/sha "08fd626d39fdf02d8fa3fda6d2fa09bbdddc4fcc"
+                                                :git/branch "master"}
                  com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                             :git/sha "49abb48eb030e2592d2f3105afe70e26d2ea4779"}
+                                             :git/sha "281595971ccd84ebd7346935114b2d188a93f464"}
                  shade/shade {:mvn/version "0.4.0"}}
    :ns-default  build-plugin
    :exec-fn build-all}}

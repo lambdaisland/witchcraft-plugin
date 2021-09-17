@@ -19,12 +19,12 @@
   (when-not (.exists config-file)
     (.info (.getLogger plugin) (str "No " config-file " found, creating default."))
     (.mkdirs (io/file (.getParent config-file)))
-    (spit config-file (slurp (io/resource "witchcraft_plugin/default_config.edn.tmpl"))))
+    (spit config-file (slurp (io/resource "witchcraft_plugin/default_config.edn"))))
 
-  (let [{:keys [nrepl require init deps]} (read-config)]
+  (let [{:keys [nrepl init deps] :as config} (read-config)]
     (when (and deps (not (.exists (io/file "deps.edn"))))
       (.info (.getLogger plugin) (str "No deps.edn found, creating default."))
-      (spit "deps.edn" (slurp (io/resource "witchcraft_plugin/default_deps.edn.tmpl"))))
+      (spit "deps.edn" (slurp (io/resource "witchcraft_plugin/default_deps.edn"))))
 
     (when deps
       (.info (.getLogger plugin) (str "Loading deps.edn" (when (map? deps) (str " with " (pr-str deps)))))
@@ -35,7 +35,7 @@
     (future
       (nrepl/dispatch-commands nrepl))
 
-    (doseq [ns-name require]
+    (doseq [ns-name (:require config)]
       (.info (.getLogger plugin) (str "require: " ns-name))
       (try
         (require ns-name)
