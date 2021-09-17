@@ -1,0 +1,33 @@
+{;; Configure the nREPL server, which you can connect to from your editor, for
+ ;; example with Calva for Visual Studio Code.
+ :nrepl
+ {:port 25555
+  :middleware [refactor-nrepl.middleware/wrap-refactor
+               cider.nrepl/cider-middleware
+               ;; Run evaluated expressions inside the game loop, so you don't
+               ;; have to schedule them explicitly
+               ;; with [[lambdaisland.witchcraft/run-task]]
+               lambdaisland.witchcraft.nrepl.task-eval/wrap-eval]}
+
+ ;; Load dependencies (like Witchcraft) from `deps.edn`. This downloads and
+ ;; installs the necessary jar files to ~/.m2, clones git-based dependencies to
+ ;; ~/.gitlibs, and then puts them all the classpath so they are accessible to
+ ;; Clojure
+ ;;
+ :deps true
+
+ ;; Instead of `true` you can put a configuration map here, see `create-basis`
+ ;; for details
+ ;; https://clojure.github.io/tools.deps.alpha/clojure.tools.deps.alpha-api.html#clojure.tools.deps.alpha/create-basis
+ ;; :deps {:aliases [:dev]}
+
+ ;; Load namespaces upon startup. You can load stuff here you want to have
+ ;; available in the REPL, require Clojure-based mods or your own custom server
+ ;; tweaks.
+ :require [lambdaisland.witchcraft
+           lambdaisland.witchcraft.paper]
+
+ ;; Finally these expressions are evaluated.
+ :init
+ [(lambdaisland.witchcraft/init-xmaterial!)
+  (alter-var-root #'lambdaisland.witchcraft/server-type (constantly :paper))]}
