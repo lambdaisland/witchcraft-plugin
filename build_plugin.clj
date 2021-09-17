@@ -2,7 +2,8 @@
   (:require [clojure.tools.build.api :as b]
             [clojure.string :as str]
             [clojure.java.io :as io]
-            [shade.core :as shade])
+            [shade.core :as shade]
+            [lambdaisland.classpath :as licp])
   (:import java.nio.file.FileSystems
            java.nio.file.Path
            java.nio.file.Paths
@@ -63,6 +64,11 @@
                          (into-array StandardOpenOption
                                      [StandardOpenOption/TRUNCATE_EXISTING]))))))))
 
+(defn witchcraft-coords []
+  (licp/git-pull-lib 'com.lambdaisland/witchcraft)
+  (get-in (read-string (slurp "deps.edn"))
+          [:aliases :witchcraft :extra-deps 'com.lambdaisland/witchcraft]))
+
 (defn build [{:keys [env api-version server] :as params
               :or {api-version "1.17"
                    server 'paper}}]
@@ -73,6 +79,14 @@
                          version
                          server
                          api-version)]
+    (.mkdirs (io/file class-dir "witchcraft_plugin"))
+    (spit (io/file class-dir "witchcraft_plugin" "default_config.edn")
+          (slurp (io/resource "witchcraft_plugin/default_config.edn.tmpl")))
+    (spit (io/file class-dir "witchcraft_plugin" "default_config.edn")
+          (str/replace
+           (slurp (io/resource "witchcraft_plugin/default_config.edn.tmpl"))
+           "{{witchcraft-coords}}"
+           (pr-str witchcraft-coords)))
     (b/write-pom {:class-dir class-dir
                   :lib lib
                   :version version
