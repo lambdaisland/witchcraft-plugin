@@ -21,7 +21,7 @@
     (.mkdirs (io/file (.getParent config-file)))
     (spit config-file (slurp (io/resource "witchcraft_plugin/default_config.edn.tmpl"))))
 
-  (let [{:keys [nrepl init deps]} (read-config)]
+  (let [{:keys [nrepl require init deps]} (read-config)]
     (when (and deps (not (.exists (io/file "deps.edn"))))
       (.info (.getLogger plugin) (str "No deps.edn found, creating default."))
       (spit "deps.edn" (slurp (io/resource "witchcraft_plugin/default_deps.edn.tmpl"))))
@@ -34,6 +34,16 @@
 
     (future
       (nrepl/dispatch-commands nrepl))
+
+    (doseq [ns-name require]
+      (.info (.getLogger plugin) (str "require: " ns-name))
+      (try
+        (require ns-name)
+        (catch Throwable e
+          (.log (.getLogger plugin)
+                java.util.logging.Level/WARNING
+                (str "Require namespace failed: " ns-name)
+                e))))
 
     (doseq [form init]
       (.info (.getLogger plugin) (str "init: " (pr-str form)))
