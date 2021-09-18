@@ -16,7 +16,7 @@ public class ClojurePlugin extends JavaPlugin {
         getLogger().info("Setting PluginClassloader as Context classloader: " + pluginLoader.toString());
 
         Thread.currentThread().setContextClassLoader(new DynamicClassLoader(pluginLoader));
-        RT.var("clojure.core", "require") .invoke(Symbol.intern("lambdaisland.witchcraft.plugin"));
+        RT.var("clojure.core", "require").invoke(Symbol.intern("lambdaisland.witchcraft.plugin"));
         RT.var("lambdaisland.witchcraft.plugin", "on-enable").invoke(this);
     }
 
