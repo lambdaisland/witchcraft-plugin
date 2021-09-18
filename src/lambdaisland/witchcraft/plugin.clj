@@ -72,7 +72,7 @@
                 (log-error t "nREPL failed to start ar exited abnormally"))))
       (.setName "witchcraft-plugin-nrepl-server")
       (.setDaemon true)
-      start)))
+      (.start))))
 
 (defn on-disable [plugin]
   (reset! instance nil))
