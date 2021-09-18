@@ -6,4 +6,3 @@
 (licp/git-pull-lib 'io.github.clojure/tools.build)
 
 (licp/classpath-chain)
-(clojure.java.io/resource "witchcraft_plugin/default_config.edn.tmpl")
