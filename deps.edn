@@ -6,7 +6,7 @@
   {:extra-paths ["dev" "repl_sessions"]}
 
   :licp {:extra-deps {com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                                  :git/sha "ade0510d4d23c223aba38f73fe0fa122931a0f98"}}}
+                                                  :git/sha "8a8c6f8558c129d92f785dfbd9b0a5a984144757"}}}
 
   :witchcraft {:extra-deps {com.lambdaisland/witchcraft {:git/url "https://github.com/lambdaisland/witchcraft"
                                                          :git/sha "f7c7d4688dad7910d60e6b869939d53577d16fca"}}}
@@ -29,7 +29,7 @@
                                                 :git/sha "85a2e8f0fb56d99461c3aadfccab28fb5337929b"
                                                 :git/branch "master"}
                  com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                             :git/sha "ade0510d4d23c223aba38f73fe0fa122931a0f98"}
+                                             :git/sha "8a8c6f8558c129d92f785dfbd9b0a5a984144757"}
                  shade/shade {:mvn/version "0.4.0"}}
    :ns-default  build-plugin
    :exec-fn build}
@@ -40,7 +40,7 @@
                                                 :git/sha "85a2e8f0fb56d99461c3aadfccab28fb5337929b"
                                                 :git/branch "master"}
                  com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                             :git/sha "ade0510d4d23c223aba38f73fe0fa122931a0f98"}
+                                             :git/sha "8a8c6f8558c129d92f785dfbd9b0a5a984144757"}
                  shade/shade {:mvn/version "0.4.0"}}
    :ns-default  build-plugin
    :exec-fn build-all}}
