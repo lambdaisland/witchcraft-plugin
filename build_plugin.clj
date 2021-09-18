@@ -14,7 +14,7 @@
            java.net.URI))
 
 (def lib 'com.lambdaisland/witchcraft-plugin)
-(def version (format "0.0.%s" (b/git-count-revs nil)))
+(def version (str (slurp ".VERSION_PREFIX") "." (b/git-count-revs nil)))
 (def class-dir "target/classes")
 
 (def shadings

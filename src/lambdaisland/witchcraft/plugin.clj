@@ -29,10 +29,7 @@
 (defn log-error [^Throwable t & args]
   (log-severe (str/join " " args))
   (log-severe (.getName (.getClass t)) ":" (.getMessage t))
-  (run! log-severe (str/split
-                    (with-out-str
-                      (.printStackTrace t))
-                    #"\R")))
+  (.printStackTrace t))
 
 (defn on-enable [plugin]
   (reset! instance plugin)
@@ -52,13 +49,6 @@
 
     (log-config "Classpath:\n" (pprint-str (cp/classpath-chain)))
 
-    (future
-      (try
-        (nrepl/dispatch-commands nrepl)
-        (log-info "nREPL exited.")
-        (catch Throwable t
-          (log-error t "nREPL failed to start ar exited abnormally"))))
-
     (doseq [ns-name (:require config)]
       (log-info "require:" ns-name)
       (try
@@ -71,7 +61,18 @@
       (try
         (eval form)
         (catch Throwable e
-          (log-error e "Init form failed to evaluate:" (pr-str form)))))))
+          (log-error e "Init form failed to evaluate:" (pr-str form)))))
+
+    (doto (Thread.
+           ^Runnable
+           #(try
+              (nrepl/dispatch-commands nrepl)
+              (log-info "nREPL exited.")
+              (catch Throwable t
+                (log-error t "nREPL failed to start ar exited abnormally"))))
+      (.setName "witchcraft-plugin-nrepl-server")
+      (.setDaemon true)
+      start)))
 
 (defn on-disable [plugin]
   (reset! instance nil))
