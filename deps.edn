@@ -6,10 +6,10 @@
   {:extra-paths ["dev" "repl_sessions"]}
 
   :licp {:extra-deps {com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                                  :git/sha "8a8c6f8558c129d92f785dfbd9b0a5a984144757"}}}
+                                                  :git/sha "de7a1a8bf4b327b96003e7737feb33bc7d4aa41b"}}}
 
   :witchcraft {:extra-deps {com.lambdaisland/witchcraft {:git/url "https://github.com/lambdaisland/witchcraft"
-                                                         :git/sha "f7c7d4688dad7910d60e6b869939d53577d16fca"}}}
+                                                         :git/sha "98858b289e38d289c0f83b8990121541918367e2"}}}
 
   :mc/glowstone-1.12 {:extra-deps {net.glowstone/glowstone {:mvn/version "2021.7.0-SNAPSHOT"}}}
   :mc/paper-1.17 {:extra-deps {io.papermc.paper/paper-api {:mvn/version "1.17.1-R0.1-SNAPSHOT"}}}
@@ -29,7 +29,7 @@
                                                 :git/sha "85a2e8f0fb56d99461c3aadfccab28fb5337929b"
                                                 :git/branch "master"}
                  com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                             :git/sha "8a8c6f8558c129d92f785dfbd9b0a5a984144757"}
+                                             :git/sha "de7a1a8bf4b327b96003e7737feb33bc7d4aa41b"}
                  shade/shade {:mvn/version "0.4.0"}}
    :ns-default  build-plugin
    :exec-fn build}
@@ -40,7 +40,7 @@
                                                 :git/sha "85a2e8f0fb56d99461c3aadfccab28fb5337929b"
                                                 :git/branch "master"}
                  com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                             :git/sha "8a8c6f8558c129d92f785dfbd9b0a5a984144757"}
+                                             :git/sha "de7a1a8bf4b327b96003e7737feb33bc7d4aa41b"}
                  shade/shade {:mvn/version "0.4.0"}}
    :ns-default  build-plugin
    :exec-fn build-all}}
