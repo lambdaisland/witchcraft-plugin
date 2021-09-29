@@ -6,10 +6,10 @@
   {:extra-paths ["dev" "repl_sessions"]}
 
   :licp {:extra-deps {com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                                  :git/sha "de7a1a8bf4b327b96003e7737feb33bc7d4aa41b"}}}
+                                                  :git/sha "0260f20fd21c2a8fd1ff6169b7b2d8689d6f35dd"}}}
 
   :witchcraft {:extra-deps {com.lambdaisland/witchcraft {:git/url "https://github.com/lambdaisland/witchcraft"
-                                                         :git/sha "98858b289e38d289c0f83b8990121541918367e2"}}}
+                                                         :git/sha "c5076061bc83d03dcc07346ac615a915b749e3bb"}}}
 
   :mc/glowstone-1.12 {:extra-deps {net.glowstone/glowstone {:mvn/version "2021.7.0-SNAPSHOT"}}}
   :mc/paper-1.17 {:extra-deps {io.papermc.paper/paper-api {:mvn/version "1.17.1-R0.1-SNAPSHOT"}}}
@@ -26,10 +26,10 @@
   :build-plugin
   {:extra-paths ["clj_yaml/src" "resources"]
    :extra-deps  {io.github.clojure/tools.build {:git/url "https://github.com/clojure/tools.build"
-                                                :git/sha "85a2e8f0fb56d99461c3aadfccab28fb5337929b"
+                                                :git/sha "99d127edc52d3f13b1049a6c1489d23e544cf9ec"
                                                 :git/branch "master"}
                  com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                             :git/sha "de7a1a8bf4b327b96003e7737feb33bc7d4aa41b"}
+                                             :git/sha "0260f20fd21c2a8fd1ff6169b7b2d8689d6f35dd"}
                  shade/shade {:mvn/version "0.4.0"}}
    :ns-default  build-plugin
    :exec-fn build}
@@ -37,10 +37,10 @@
   :build-all
   {:extra-paths ["clj_yaml/src" "resources"]
    :extra-deps  {io.github.clojure/tools.build {:git/url "https://github.com/clojure/tools.build"
-                                                :git/sha "85a2e8f0fb56d99461c3aadfccab28fb5337929b"
+                                                :git/sha "99d127edc52d3f13b1049a6c1489d23e544cf9ec"
                                                 :git/branch "master"}
                  com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                             :git/sha "de7a1a8bf4b327b96003e7737feb33bc7d4aa41b"}
+                                             :git/sha "0260f20fd21c2a8fd1ff6169b7b2d8689d6f35dd"}
                  shade/shade {:mvn/version "0.4.0"}}
    :ns-default  build-plugin
    :exec-fn build-all}}
