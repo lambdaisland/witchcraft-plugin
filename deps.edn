@@ -5,31 +5,29 @@
  {:dev
   {:extra-paths ["dev" "repl_sessions"]}
 
-  :licp {:extra-deps {com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                                  :git/sha "0260f20fd21c2a8fd1ff6169b7b2d8689d6f35dd"}}}
+  :licp {:extra-deps {com.lambdaisland/classpath {:mvn/version "0.0.27"}}}
 
-  :witchcraft {:extra-deps {com.lambdaisland/witchcraft {:git/url "https://github.com/lambdaisland/witchcraft"
-                                                         :git/sha "c5076061bc83d03dcc07346ac615a915b749e3bb"}}}
+  :witchcraft {:extra-deps {com.lambdaisland/witchcraft {:mvn/version "RELEASE"}}}
 
-  :mc/glowstone-1.12 {:extra-deps {net.glowstone/glowstone {:mvn/version "2021.7.0-SNAPSHOT"}}}
+  :mc/glowstone-1.12 {:extra-deps {net.glowstone/glowstone {:mvn/version "2021.8.0"}}}
   :mc/paper-1.17 {:extra-deps {io.papermc.paper/paper-api {:mvn/version "1.17.1-R0.1-SNAPSHOT"}}}
+  :mc/paper-1.18 {:extra-deps {io.papermc.paper/paper-api {:mvn/version "1.18-rc3-R0.1-SNAPSHOT"}}}
   :mc/spigot-1.17 {:extra-deps {org.spigotmc/spigot-api {:mvn/version "1.17.1-R0.1-SNAPSHOT"}}}
 
   ;; :mc/paper     {:extra-deps {io.papermc/paper {:local/root "/home/arne/Downloads/paper-1.17.1-157.jar"}}}
   ;; :mc/paperclip {:extra-deps {io.papermc/paperclip {:mvn/version "2.0.1"}}}
 
-  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.8.3"}}}
+  :nrepl {:extra-deps {nrepl/nrepl {:mvn/version "0.9.0-beta4"}}}
 
-  :cider/nrepl {:extra-deps {refactor-nrepl/refactor-nrepl {:mvn/version "2.5.1"}
-                             cider/cider-nrepl             {:mvn/version "0.26.0"}}}
+  :cider/nrepl {:extra-deps {refactor-nrepl/refactor-nrepl {:mvn/version "3.1.0"}
+                             cider/cider-nrepl             {:mvn/version "0.27.2"}}}
 
   :build-plugin
   {:extra-paths ["clj_yaml/src" "resources"]
    :extra-deps  {io.github.clojure/tools.build {:git/url "https://github.com/clojure/tools.build"
-                                                :git/sha "99d127edc52d3f13b1049a6c1489d23e544cf9ec"
+                                                :git/sha "816623ae1b62bbf7987b6eb5caab90e14191fa97"
                                                 :git/branch "master"}
-                 com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
-                                             :git/sha "0260f20fd21c2a8fd1ff6169b7b2d8689d6f35dd"}
+                 com.lambdaisland/classpath {:mvn/version "0.0.27"}
                  shade/shade {:mvn/version "0.4.0"}}
    :ns-default  build-plugin
    :exec-fn build}
@@ -37,7 +35,7 @@
   :build-all
   {:extra-paths ["clj_yaml/src" "resources"]
    :extra-deps  {io.github.clojure/tools.build {:git/url "https://github.com/clojure/tools.build"
-                                                :git/sha "99d127edc52d3f13b1049a6c1489d23e544cf9ec"
+                                                :git/sha "816623ae1b62bbf7987b6eb5caab90e14191fa97"
                                                 :git/branch "master"}
                  com.lambdaisland/classpath {:git/url "https://github.com/lambdaisland/classpath"
                                              :git/sha "0260f20fd21c2a8fd1ff6169b7b2d8689d6f35dd"}

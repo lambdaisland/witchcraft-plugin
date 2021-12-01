@@ -110,4 +110,5 @@
 (defn build-all [& _]
   (build '{:server glowstone :api-version 1.12})
   (build '{:server paper :api-version 1.17})
+  (build '{:server paper :api-version 1.18})
   (build '{:server spigot :api-version 1.17}))
