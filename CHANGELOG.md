@@ -1,3 +1,13 @@
+# Unreleased
+
+## Added
+
+- Support for Paper 1.18 (prerelease)
+
+## Changed
+
+- Version bumps
+
 # 0.1.22
 
 ## Fixed
