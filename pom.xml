@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.lambdaisland</groupId>
   <artifactId>witchcraft-plugin</artifactId>
-  <version>0.5.30</version>
+  <version>0.7.35</version>
   <name>witchcraft-plugin</name>
   <description></description>
   <url>https://github.com/lambdaisland/witchcraft-plugin</url>
@@ -25,7 +25,7 @@
     <url>https://github.com/lambdaisland/witchcraft-plugin</url>
     <connection>scm:git:git://github.com/lambdaisland/witchcraft-plugin.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/lambdaisland/witchcraft-plugin.git</developerConnection>
-    <tag>aa5dcd3ed146585db67ac336ebd0b128b8301cd4</tag>
+    <tag>5a38403d41e7f991f865a0cb06c9979226f9568e</tag>
   </scm>
   <dependencies>
     <dependency>
@@ -64,7 +64,7 @@
         <configuration>
           <archive>
             <manifestEntries>
-              <git-revision>aa5dcd3ed146585db67ac336ebd0b128b8301cd4</git-revision>
+              <git-revision>5a38403d41e7f991f865a0cb06c9979226f9568e</git-revision>
             </manifestEntries>
           </archive>
         </configuration>
