@@ -2,7 +2,13 @@
 
 ## Added
 
-- Support for Paper 1.18 (prerelease)
+- Softdepend on Citizens
+
+# 0.5.27
+
+## Added
+
+- Support for Paper 1.18
 
 ## Changed
 
