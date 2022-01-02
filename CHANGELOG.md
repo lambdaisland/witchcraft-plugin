@@ -1,4 +1,4 @@
-# Unreleased
+# 0.6.32 (2022-01-02 / d550dff)
 
 ## Added
 
@@ -56,4 +56,3 @@
 - With this plugin you get an embedded nREPL server for interactive creative
   coding, deps.edn support to add additional dependencies, and the ability to load
   and evaluate Clojure code when the server starts.
-
