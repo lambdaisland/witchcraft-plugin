@@ -41,7 +41,8 @@
           :version version
           :author "lambdaisland"
           :description "Bootstrap Clojure/nREPL/Witchcraft"
-          :api-version api-version})))
+          :api-version api-version
+          :softdepend ["Citizens"]})))
 
 (defn shade-jar [in out]
   ;; java
